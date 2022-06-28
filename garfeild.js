@@ -20,12 +20,13 @@ var group;
 
 function preload() {
   this.load.image("garfield", "assets/orange-cat1.png");
+  this.load.image("star", "assets/star.png");
 }
 
 function create() {
   cursors = this.input.keyboard.createCursorKeys();
-  group = this.physics.add.group({ key: "garfield", frameQuantity: 3000 });
-  cat = this.physics.add.image(400, 300, "garfield");
+  group = this.physics.add.group({ key: "star", frameQuantity: 300 });
+  cat = this.physics.add.image(500, 300, "garfield");
 
   var cats = group.getChildren();
 
@@ -33,7 +34,10 @@ function create() {
     var xRandom = Phaser.Math.Between(0, 800);
     var yRandom = Phaser.Math.Between(0, 600);
     justACat.setPosition(xRandom, yRandom);
-    justACat.setScale(3);
+    justACat.setScale(2);
+  });
+  this.physics.add.overlap(cat, group, function (a, star) {
+    group.killAndHide(star);
   });
 }
 
